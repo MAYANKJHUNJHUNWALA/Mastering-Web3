@@ -1,0 +1,94 @@
+    public class Car {
+    private String make;
+    private String model;
+    private int year;
+    private int speed;
+    private int x;
+    private int y;
+    private int z;
+
+    // Constructor
+    public Car(String make, String model, int year, int speed, int x, int y, int z) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.speed = speed;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+    public String getMake() {
+        return make;
+    }
+    public String getModel() {
+        return model;
+    }
+    public int getYear() {
+        return year;
+    }
+    public int getSpeed() {
+        return speed;
+    } 
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public int getZ() {
+        return z;
+    }
+    // Methods
+    public void accelerate(int speed_increment) {
+        speed += speed_increment;
+    }
+
+    public void brake(int speed_decrement) {
+        speed -= speed_decrement;
+        if (speed < 0) {
+            speed = 0;
+        }
+    }
+
+    public void move() {
+        x += speed;
+        y += speed;
+        z += speed;
+    }
+
+    public boolean detect_collision(Car car2) {
+        // Assuming collision occurs when the x, y, and z coordinates of two cars are the same
+        return this.x == car2.getX() && this.y == car2.getY() && this.z == car2.getZ();
+    }
+
+    public double time_to_collision(Car car2) {
+        // Assuming time to collision is the maximum of the differences in x, y, and z coordinates divided by the relative speed
+        int relativeSpeed = this.speed - car2.getSpeed();
+        if (relativeSpeed <= 0) {
+            return Double.POSITIVE_INFINITY; // If relative speed is non-positive, return positive infinity
+        }  // using Math library
+        double timeX = Math.abs((double) (car2.getX() - this.x) / relativeSpeed);
+        double timeY = Math.abs((double) (car2.getY() - this.y) / relativeSpeed);
+        double timeZ = Math.abs((double) (car2.getZ() - this.z) / relativeSpeed);
+        return Math.max(timeX, Math.max(timeY, timeZ));
+    }
+
+    // Test method
+    public static void main(String[] args) {
+        // Create two car objects with 3D coordinates
+        Car car1 = new Car("Maruti", "BMW", 2020, 60, 0, 0, 0);
+        Car car2 = new Car("Audi", "Porsche", 2018, 40, 100, 0, 0);
+
+        // Move car1 and car2 in 3D space
+        car1.move();
+        car2.move();
+
+        // Detect collision between car1 and car2
+        boolean collision = car1.detectCollision(car2);
+        System.out.println("Collision Detected: " + collision);
+
+        // Calculate time to collision between car1 and car2
+        double timeToCollision = car1.time_to_collision(car2);
+        System.out.println("Time to Collision: " + time_to_collision + " hours");
+    }
+}
