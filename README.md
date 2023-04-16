@@ -1,0 +1,2 @@
+# README 
+I have written this program using the java coding language where I used the attributes and methods provided to me in the task and then I also created a sample of collision of cars using some sample data to test the program, I even used a constructor in my java program and made all the attributes private to be accessed in the program in the class . I have shared the link of this github repository in the google doc as instructed in the readme format.
